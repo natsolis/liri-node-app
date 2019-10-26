@@ -8,4 +8,4 @@ LIRI is a Language Interpretation and Recognition Interface.  LIRI will be a com
 JavaScript, Node.js, Request library, Spotify API, dateFormat library, File system library.
 
 ## How to Use Liri 
-!(/images/Screen%20Shot%202019-10-26%20at%203.09.30%20PM.png)
+![ ](/images/Screen%20Shot%202019-10-26%20at%203.09.30%20PM.png)
