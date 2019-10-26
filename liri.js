@@ -11,6 +11,7 @@ var dateFormat = require("dateFormat");
 // require file systems
 var fs = require("fs");
 
+var spotify = new Spotify(keys.spotify);
 
 // // npm package 
 // var axios = require("axios")
@@ -18,26 +19,7 @@ var fs = require("fs");
 
 
 // take user's command
-var Commands = function(func, parm) {
-    switch (func) {
-        case "concert-this":
-            concertThis(parm)
-            break
-        case "spotify-this-song":
-            spotifyThisSong(parm)
-            break
-        case "movie-this":
-            movieThis(parm)
-            break
-        case "do-what-it-says":
-            doWhatItSays()
-            break
-        default:
-            outputData("I don't recognize that command, please try again.") 
-    }
-}
 
-Commands(process.argv[2], process.argv[3])
 
 
 //  function for concert-this
@@ -52,7 +34,7 @@ var concertThis = function(artist){
             // Save parsed body in a new variable for easier use
             var concertInfo = JSON.parse(body)
             
-            outputData(artist + " concert information:")
+            console.log(artist + " concert information:")
 
             for (i=0; i < concertInfo.length; i++) {
                 
@@ -63,9 +45,9 @@ var concertThis = function(artist){
                 }
 
                 // Need to return Name of venue, Venue location, Date of event (MM/DD/YYYY)
-                outputData("Venue: " + concertInfo[i].venue.name)
-                outputData("Location: " + concertInfo[i].venue.city + ", " + region);
-                outputData("Date: " + dateFormat(concertInfo[i].datetime, "mm/dd/yyyy"))
+                console.log("Venue: " + concertInfo[i].venue.name)
+                console.log("Location: " + concertInfo[i].venue.city + ", " + region);
+                console.log("Date: " + dateFormat(concertInfo[i].datetime, "mm/dd/yyyy"))
             }
         }
     })
@@ -77,22 +59,22 @@ var concertThis = function(artist){
 var spotifyThisSong = function(song){
 // Default should be "The Sign" by Ace of Base
     if (!song){
-        song = "Sweater Weather"
+        song = "the sign"
     }
 
-    var spotify = new Spotify(keys.spotify);
+    //var spotify = new Spotify(keys.spotify);
 
-    spotify.search({type: "track", query: song, limit: 1}, function (err, data){
+    spotify.search({type: "track", query: song}, function (err, data){
         if (err) {
             return console.log(err)
         }
 
         // Need to return Artist(s), Song Name, Album, Preview link of song from Spotify
         var songInfo = data.tracks.items[0]
-        outputData(songInfo.artists[0].name)
-        outputData(songInfo.name)
-        outputData(songInfo.album.name)
-        outputData(songInfo.preview_url)
+       console.log("Artist Name: " + songInfo.artists[0].name);
+        console.log("Song Name : " + songInfo.name);
+        console.log("Album Name : " + songInfo.album.name);
+        console.log("Song URL : " + songInfo.preview_url);
     })
 }
 
@@ -114,22 +96,22 @@ var movieThis = function(movie){
             // Language, Plot, Actors
             var movieInfo = JSON.parse(body)
 
-            outputData("Title: " + movieInfo.Title)
-            outputData("Release year: " + movieInfo.Year)
-            outputData("IMDB Rating: " + movieInfo.imdbRating)
-            outputData("Rotten Tomatoes Rating: " + movieInfo.Ratings[1].Value)
-            outputData("Country: " + movieInfo.Country)
-            outputData("Language: " + movieInfo.Language)
-            outputData("Plot: " + movieInfo.Plot)
-            outputData("Actors: " + movieInfo.Actors)
+            console.log("Title: " + movieInfo.Title)
+            console.log("Release year: " + movieInfo.Year)
+            console.log("IMDB Rating: " + movieInfo.imdbRating)
+            console.log("Rotten Tomatoes Rating: " + movieInfo.Ratings[1].Value)
+            console.log("Country: " + movieInfo.Country)
+            console.log("Language: " + movieInfo.Language)
+            console.log("Plot: " + movieInfo.Plot)
+            console.log("Actors: " + movieInfo.Actors)
         }
     })
 }
 
-function doThis() {
+function doWhatItSays() {
     // access the random.txt
     fs.readFile("random.txt", "utf8", function (err, data) {
-        if (error) {
+        if (err) {
             return console.log(err);
         }
         // methond will seaparate objects within new array
@@ -139,9 +121,31 @@ function doThis() {
         userInput = dataArr[0];
         userQuery = dataArr[1];
         // calling all function jk (just new parameters)
-        userCommand(userInput, userQuery);
+        Commands(userInput, userQuery);
     });
 };
+
+
+var Commands = function(func, parm) {
+    switch (func) {
+        case "concert-this":
+            concertThis(parm);
+            break;
+        case "spotify-this-song":
+            spotifyThisSong(parm);
+            break;
+        case "movie-this":
+            movieThis(parm);
+            break;
+        case "do-what-it-says":
+            doWhatItSays();
+            break;
+        default:
+            outputData("I don't recognize that command, please try again.") 
+    }
+}
+
+Commands(process.argv[2], process.argv[3])
 
    
     

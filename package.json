@@ -1,7 +1,7 @@
 {
   "name": "liri-node-app",
   "version": "1.0.0",
-  "main": "key.js",
+  "main": "liri.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,6 +12,7 @@
   "dependencies": {
     "dateformat": "^3.0.3",
     "dotenv": "^8.0.0",
+    "node-spotify-api": "^1.1.1",
     "request": "^2.88.0",
     "spotify": "^0.3.0"
   }
