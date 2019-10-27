@@ -36,10 +36,30 @@ Will search the Spotify API for a song and show the following information about 
       * A preview link of the song from Spotify
       * The album that the song is from
 
-![images]()
+![images](https://github.com/natsolis/liri-node-app/blob/master/images%20/Screen%20Shot%202019-10-27%20at%205.32.47%20PM.png)
    #movie-this
    
    `node liri.js movie-this '<movie name here>'`
+
+
+  * This will search the OMDB API for a movie name and show the following information in the `terminal` and to the `random.txt` file:
+
+      * Title of the movie.
+      * Year the movie came out.
+      * IMDB Rating of the movie.
+      * Rotten Tomatoes Rating of the movie.
+      * Country where the movie was produced.
+      * Language of the movie.
+      * Plot of the movie.
+      * Actors in the movie.
+
+      ![images](https://github.com/natsolis/liri-node-app/blob/master/images%20/Screen%20Shot%202019-10-27%20at%205.35.46%20PM.png)
+
+      #do-what-it-says
+
+      * LIRI will take the text inside of `random.txt` and then use it to call one of LIRI's commands.
+
+
 
    
 
